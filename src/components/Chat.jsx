@@ -16,7 +16,7 @@ const Chat = (props) =>{
     //onSnapshot will help us specify exactly which changes to listen for.
     //In this case, we are only listening for changes in the messages collection for the room that the user user is in.
     useEffect( () => {
-        const queryMessages = query(messagesRef, where("room", "==", room), orderBy("createdAt"));
+        const queryMessages = query(messagesRef, where("room", "==", room), where("room", ">=", room), where("room", "<", room + "\uf8ff"), orderBy("createdAt"));
         const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
             let messages = [];
             snapshot.forEach((doc) => {

@@ -12,7 +12,7 @@ const Auth = (props) => {
     const signInWithGoogle = async () => {
         try{
             await signInWithPopup(auth, provider);
-            cookies.set("auth-token", auth.currentUser.getIdToken); //(name of cookie, chose the refreshToken for this example but there are other options)
+            cookies.set("auth-token", auth.currentUser.getIdToken); 
             console.log("Successfully signed in with Google!");
             setIsAuth(true);
         } catch(err){
@@ -38,7 +38,7 @@ const Auth = (props) => {
             //const errEmail = auth;
             console.log(errorCode);
             console.log(errorMessage);
-            alert("It looks like you already have an account with an email that is connected to this GitHub account");
+            alert("It looks like you already have an account with an email that is connected to a GitHub account");
         }
     }
 
