@@ -6,8 +6,7 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies() //setting a cookie on the users browser so the user is not signed out after some time or when refreshing the app.
 
 //component to handle user Authentication
-const Auth = (props) => {
-    const { setIsAuth } = props;
+const Auth = ({ setIsAuth }) => {
 
     const signInWithGoogle = async () => {
         try{

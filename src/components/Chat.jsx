@@ -5,8 +5,7 @@ import { db, auth } from '../firebase-config.js'
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
-const Chat = (props) =>{
-    const {room} = props;
+const Chat = ({ room }) =>{
     const [newMessage, setNewMessage] = useState(""); //will represent what the user is typing in the form input
     const [messages, setMessages] = useState([]);
     const messagesRef = collection(db, "messages"); //a reference to the messages collection
@@ -16,7 +15,7 @@ const Chat = (props) =>{
     //onSnapshot will help us specify exactly which changes to listen for.
     //In this case, we are only listening for changes in the messages collection for the room that the user user is in.
     useEffect( () => {
-        const queryMessages = query(messagesRef, where("room", "==", room), where("room", ">=", room), where("room", "<", room + "\uf8ff"), orderBy("createdAt"));
+        const queryMessages = query(messagesRef, where("room", "==", room));
         const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
             let messages = [];
             snapshot.forEach((doc) => {
