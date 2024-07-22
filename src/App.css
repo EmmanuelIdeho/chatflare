@@ -4,13 +4,6 @@ html {
   background: repeating-linear-gradient(45deg, #92c9b1, #92c9b1 20px, #b3e0d2 20px, #b3e0d2 40px);
 }
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-}
-
 .generalForm {
   --background: #d3d3d3;
   --input-focus: #2d8cf0;
@@ -166,9 +159,4 @@ html {
   font-weight: 600;
   color: var(--font-color);
   cursor: pointer;
-}
-
-
-footer{
-  align-self: flex-start;
 }

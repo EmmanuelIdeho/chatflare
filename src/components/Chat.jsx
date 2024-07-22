@@ -9,10 +9,8 @@ const Chat = (props) =>{
     const {room} = props;
     const [newMessage, setNewMessage] = useState(""); //will represent what the user is typing in the form input
     const [messages, setMessages] = useState([]);
-
     const messagesRef = collection(db, "messages"); //a reference to the messages collection
 
-    //cookies.set(room, auth.currentUser.getIdToken);
 
     //our program will be listening for any changes to the collection.
     //onSnapshot will help us specify exactly which changes to listen for.

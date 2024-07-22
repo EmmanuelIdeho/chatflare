@@ -19,8 +19,8 @@ const Auth = (props) => {
             // Handle Errors here.
             const errorCode = err.code;
             const errorMessage = err.message;
-            console.log(errorCode)
-            console.log(errorMessage)
+            console.log(errorCode);
+            console.log(errorMessage);
         }
     }
 
@@ -35,8 +35,10 @@ const Auth = (props) => {
             // Handle Errors here.
             const errorCode = err.code;
             const errorMessage = err.message;
-            console.log(errorCode)
-            console.log(errorMessage)
+            //const errEmail = auth;
+            console.log(errorCode);
+            console.log(errorMessage);
+            alert("It looks like you already have an account with an email that is connected to this GitHub account");
         }
     }
 
