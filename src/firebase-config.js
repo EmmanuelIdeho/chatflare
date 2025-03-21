@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
-// Your web app's Firebase configuration
+// My web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY || "mock key",
@@ -19,6 +19,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const provider = new GoogleAuthProvider();
+export const providerGoogle = new GoogleAuthProvider();
 export const providerGit = new GithubAuthProvider();
 export const db = getFirestore(app);
