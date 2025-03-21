@@ -1,11 +1,10 @@
 import Auth from './components/Auth.jsx'
 import Chat from './components/Chat.jsx'
-import { useState, useRef } from "react"
-
+import { useState, useRef, useEffect } from "react"
 import Cookies from 'universal-cookie'
-
 import {signOut, deleteUser} from "firebase/auth"
 import {auth} from "./firebase-config.js"
+
 const cookies = new Cookies()
 
 function App() {
@@ -13,14 +12,34 @@ function App() {
   const [isAuth, setIsAuth] = useState(cookies.get("auth-token")) 
 
   //used to represent whether the user is in a room or not 
-  const [room, setRoom] = useState(null)
+  const [room, setRoom] = useState(() => sessionStorage.getItem("currentRoom") || null)
+
+  //used to reference what the user types in the <input /> and use that text to create the room.
+  const roomInputRef = useRef(null)
 
   const signUserOut = async () =>{
     await signOut(auth);
     cookies.remove("auth-token");
+    sessionStorage.removeItem("currentRoom");   // Clear the room on sign out
     setIsAuth(false);
     setRoom(null);
 
+  }
+
+  // Automatically restore room on page refresh
+  useEffect(() => {
+    const savedRoom = sessionStorage.getItem("currentRoom")
+    if (savedRoom) {
+      setRoom(savedRoom)
+    }
+  }, []);
+
+  const enterRoom = () => {
+    const roomName = roomInputRef.current.value
+    if (roomName) {
+      sessionStorage.setItem("currentRoom", roomName)  // Save room to sessionStorage
+      setRoom(roomName)
+    }
   }
 
   /*
@@ -34,8 +53,7 @@ function App() {
       
   }*/
 
-  //used to reference what the user types in the <input /> and use that text to create the room.
-  const roomInputRef = useRef(null)
+  
   if(!isAuth){
     return (
       <>
@@ -52,13 +70,13 @@ function App() {
       <div className="generalForm">
           <p>Enter Room Name</p>
           <input ref={roomInputRef}/>
-          <button className="generalButton" onClick={() => setRoom(roomInputRef.current.value)}>Enter Chat</button>
+          <button className="generalButton" onClick={enterRoom}>Enter Chat</button>
         <div id="sign-out">
           <button className="generalButton" onClick={signUserOut}>SignOut</button>
         </div> 
       </div>)}
     </>
   )
-}
+};
 
 export default App

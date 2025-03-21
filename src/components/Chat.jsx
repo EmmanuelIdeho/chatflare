@@ -2,9 +2,6 @@ import { useState, useEffect } from "react"
 import { addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from 'firebase/firestore'
 import { db, auth } from '../firebase-config.js'
 
-import Cookies from 'universal-cookie'
-const cookies = new Cookies()
-
 const Chat = ({ room }) =>{
     const [newMessage, setNewMessage] = useState(""); //will represent what the user is typing in the form input
     const [messages, setMessages] = useState([]);
@@ -15,7 +12,13 @@ const Chat = ({ room }) =>{
     //onSnapshot will help us specify exactly which changes to listen for.
     //In this case, we are only listening for changes in the messages collection for the room that the user user is in.
     useEffect( () => {
-        const queryMessages = query(messagesRef, where("room", "==", room));
+        if (!room) return; // Ensure room is defined before querying Firestore
+        
+        const queryMessages = query(
+            messagesRef, 
+            where("room", "==", room),
+            orderBy("createdAt", "asc")  
+        );
         const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
             let messages = [];
             snapshot.forEach((doc) => {
@@ -60,6 +63,6 @@ const Chat = ({ room }) =>{
         </footer>
     </div>
     );
-}
+};
 
 export default Chat;

@@ -1,4 +1,4 @@
-import { auth, provider, providerGit} from '../firebase-config.js'
+import { auth, providerGoogle, providerGit} from '../firebase-config.js'
 import { signInWithPopup } from 'firebase/auth'
 
 import Cookies from 'universal-cookie'
@@ -10,7 +10,7 @@ const Auth = ({ setIsAuth }) => {
 
     const signInWithGoogle = async () => {
         try{
-            await signInWithPopup(auth, provider);
+            await signInWithPopup(auth, providerGoogle);
             cookies.set("auth-token", auth.currentUser.getIdToken); 
             console.log("Successfully signed in with Google!");
             setIsAuth(true);
