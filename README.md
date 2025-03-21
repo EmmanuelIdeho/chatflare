@@ -27,6 +27,5 @@ Contributions are welcome! If you would like to contribute to ChatFlare, please 
 
 ### Links
 
-- Source code URL: [https://github.com/EmmanuelIdeho/chatflare](https://github.com/EmmanuelIdeho/chatflare)
 - Live Site URL: [https://chatflare.netlify.app/](https://chatflare.netlify.app/)
 
