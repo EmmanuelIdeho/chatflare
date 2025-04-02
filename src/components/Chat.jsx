@@ -7,6 +7,11 @@ const Chat = ({ room }) =>{
     const [messages, setMessages] = useState([]);
     const messagesRef = collection(db, "messages"); //a reference to the messages collection
 
+    function scrollToBottom() {
+        const chatBox = document.querySelector(".chat-messages");
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
 
     //our program will be listening for any changes to the collection.
     //onSnapshot will help us specify exactly which changes to listen for.
@@ -25,6 +30,7 @@ const Chat = ({ room }) =>{
                 messages.push({...doc.data(), id: doc.id}); //push the data from doc into an empty messages array, along with a unique id
             });
             setMessages(messages);
+            scrollToBottom();
         });
         return () => unsubscribe(); //cleaning up useEffect
     }, []);
@@ -41,7 +47,9 @@ const Chat = ({ room }) =>{
         });
 
         setNewMessage("");  
+        scrollToBottom();
     };
+    
 
     return(
     <div className="generalForm">
@@ -57,7 +65,7 @@ const Chat = ({ room }) =>{
         </div>
         <footer>
         <form onSubmit={handleSubmit} className="new-message-form">
-            <input className="new-message-input" placeholder="Type your message here..." onChange={(e) => setNewMessage(e.target.value)} value={newMessage} type="text"/>
+            <input type="text" className="new-message-input" placeholder="Type your message here..." onChange={(e) => setNewMessage(e.target.value)} value={newMessage} />
             <button type="submit" className="generalButton">Send</button>
         </form>
         </footer>

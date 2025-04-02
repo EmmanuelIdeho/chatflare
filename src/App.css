@@ -18,7 +18,7 @@ html {
   align-items: normal;
   justify-content: center;
   max-width: 30em;
-  margin: 10em auto;
+  margin: 5em auto;
   gap: 20px;
   border-radius: 5px;
   border: 2px solid var(--main-color);
@@ -132,7 +132,7 @@ html {
 
 .new-message-input{
   width: 20em;
-  height: 20px;
+  height: 30px;
   border-radius: 5px;
   border: 2px solid var(--main-color);
   background-color: var(--bg-color);
@@ -160,3 +160,19 @@ html {
   color: var(--font-color);
   cursor: pointer;
 }
+
+.chat-messages {
+  overflow-y: auto;
+    height: 200px;
+    max-height: 60vh; /* Adjust based on screen size */
+    scroll-behavior: smooth;
+  will-change: scroll-position;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*
+@media (max-width: 768px) {
+  .chat-messages {
+    max-height: 300px;
+  }
+}*/
